@@ -10,11 +10,11 @@ read -r -p "Do you want to install a server repository or do you want to add a c
 
 if [[ $prompt == "SERVER" ]]
 then
-./scripts/server.sh
+bash scripts/server.sh
 
 elif [[ $prompt == "client" ]]
 then
-./scripts/client.sh
+bash scripts/client.sh
 
 else
 echo "Nothing has been selected."
