@@ -63,5 +63,3 @@ sudo ./start.sh
 ```
 /root/archive_packages.sh
 ```
-
-BTW Pinephone + #keyboard test is coming in about 6 weeks. My daily phone is on vacation (warranty). So I will test it as a daily driver.
