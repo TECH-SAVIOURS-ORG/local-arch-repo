@@ -4,7 +4,14 @@ arch=$(uname -m)
 server="$(ip addr show | grep "inet " | grep -v 127.0.0. | head -1 | cut -d" " -f6 | cut -d/ -f1)"
 ## Rsync credentials
 read -p "Enter your user for rsync daemon credentials: " user
-read -p "Enter your password: " -s password
+while true; do
+  read -s -p "Enter your password: " password
+  echo
+  read -s -p "Password (again): " password2
+  echo
+  [ "$password" = "$password2" ] && break
+  echo "Please try again"
+done
 
 # Hooks
 mkdir /etc/pacman.d/hooks/
