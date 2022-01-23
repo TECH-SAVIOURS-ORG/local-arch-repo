@@ -1,8 +1,16 @@
 # local-arch-repo
 Running multiple Arch devices? Create your own package archive repository and simply add another device.  
-This is actually for a pinephone and other x86_64 Arch devices. Probably PIs (armv7l) will follow.
+This is actually for a pinephone and other x86_64 Arch devices. Probably PIs (armv7l) will follow.  
+
+# What does it?
+These are just a few bash scripts to install your local repository or add another client, and two hooks for your pacman updates.  
+  
+On the _server_ side, the __rsync daemon__ + credentials + config file modifications are created to be ready for the clients. Furthermore, the __hooks__ are placed and also the `repo-add.sh` script for the `post exec` commands - after the client has pushed its packages or for the server after it has received an update via pacman (hook). The `pacman.conf` is modified for the new repository and the new package cache path.  
+  
+On the _client_ side, `pacman.conf` is also changed for the new repository. Like on the server, the hooks are placed and `archive_packages.sh` is copied to the root folder, which will be activated via the hook. Rsync credentials are created.
 
 # Usage
+Just run the `start.sh` script and chose either `SERVER` or `client`. 
 
 ## Packages
 ```
@@ -55,3 +63,5 @@ sudo ./start.sh
 ```
 /root/archive_packages.sh
 ```
+
+BTW Pinephone + #keyboard test is coming in about 6 weeks. My daily phone is on vacation (warranty). So I will test it as a daily driver.
