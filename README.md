@@ -14,7 +14,7 @@ Just run the `start.sh` script and chose either `SERVER` or `client`.
 
 ## Packages
 ```
-sudo pacman -S rsync
+sudo pacman -S rsync pacman-contrib
 ```
 
 ## Webserver
@@ -59,7 +59,7 @@ chmod u+x start.sh
 sudo ./start.sh
 ```
 
-## Test it
+## Test it (client)
 ```
 /root/archive_packages.sh
 ```
