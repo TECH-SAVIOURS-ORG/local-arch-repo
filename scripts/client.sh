@@ -6,11 +6,11 @@ read -p "Enter your password: " -s password
 
 # Hooks
 mkdir /etc/pacman.d/hooks/
-cp 1.cleanup_cache.hook /etc/pacman.d/hooks/
-cp 2.archive_packages-client.hook /etc/pacman.d/hooks/2.archive_packages.hook
+cp hooks/1.cleanup_cache.hook /etc/pacman.d/hooks/
+cp hooks/2.archive_packages-client.hook /etc/pacman.d/hooks/2.archive_packages.hook
 
 # Script/s
-cp archive_packages.sh /root/
+cp scripts/archive_packages.sh /root/
 chmod +x /root/archive_packages.sh
 
 # Rsync credentials

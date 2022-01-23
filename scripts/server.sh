@@ -8,11 +8,11 @@ read -p "Enter your password: " -s password
 
 # Hooks
 mkdir /etc/pacman.d/hooks/
-cp 1.cleanup_cache.hook /etc/pacman.d/hooks/
-cp 2.archive_packages-server.hook /etc/pacman.d/hooks/2.archive_packages.hook
+cp hooks/1.cleanup_cache.hook /etc/pacman.d/hooks/
+cp hooks/2.archive_packages-server.hook /etc/pacman.d/hooks/2.archive_packages.hook
 
 # Script/s
-cp repo-add.sh /root/
+cp scripts/repo-add.sh /root/
 chmod +x /root/repo-add.sh
 
 # Database
