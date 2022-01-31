@@ -23,11 +23,11 @@ cp scripts/repo-add.sh /root/
 chmod +x /root/repo-add.sh
 
 # Database
-mkdir -p /srv/http/repo/archlinux/{x86_64,aarch64}/AUR
+mkdir -p /srv/http/repo/archlinux/{x86_64,aarch64}/aur 
 repo-add /srv/http/repo/archlinux/x86_64/homerepo.db.tar.zst
-repo-add /srv/http/repo/archlinux/x86_64/AUR/homerepo.db.tar.zst
+repo-add /srv/http/repo/archlinux/x86_64/aur/homerepo-aur.db.tar.zst
 repo-add /srv/http/repo/archlinux/aarch64/homerepo.db.tar.zst
-repo-add /srv/http/repo/archlinux/aarch64/AUR/homerepo.db.tar.zst
+repo-add /srv/http/repo/archlinux/aarch64/aur/homerepo-aur.db.tar.zst
 
 # Move existing packages
 mv /var/cache/pacman/pkg/*pkg* /srv/http/repo/archlinux/$arch/
@@ -62,3 +62,5 @@ systemctl enable --now rsyncd.service
 # Add repository to pacman.conf
 echo "[homerepo]
 Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
+echo "[homerepo-aur]
+Server = http://$server:8080/archlinux/\$arch/aur" >> /etc/pacman.conf

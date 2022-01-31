@@ -19,6 +19,8 @@ cp hooks/2.archive_packages-client.hook /etc/pacman.d/hooks/2.archive_packages.h
 # Script/s
 cp scripts/archive_packages.sh /root/
 chmod +x /root/archive_packages.sh
+cp scripts/aur_packages.sh $HOME
+chmod +x $HOME/aur_packages.sh
 
 # Rsync credentials
 echo "$user" > /etc/rsyncd.user
@@ -29,3 +31,5 @@ chmod 400 /etc/rsyncd.user /etc/rsyncd.password /etc/rsyncd.server
 # Add repository to pacman.conf
 echo "[homerepo]
 Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
+echo "[homerepo-aur]
+Server = http://$server:8080/archlinux/\$arch/aur" >> /etc/pacman.conf
