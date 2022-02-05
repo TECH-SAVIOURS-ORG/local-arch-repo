@@ -1,5 +1,8 @@
 #!/bin/bash
 # Variables
+real_user=$SUDO_USER
+
+# rsync daemon credentials
 read -p "Enter your archive server ip address: " server
 read -p "Enter your user for rsync daemon credentials: " user
 while true; do
@@ -19,8 +22,13 @@ cp hooks/2.archive_packages-client.hook /etc/pacman.d/hooks/2.archive_packages.h
 # Script/s
 cp scripts/archive_packages.sh /root/
 chmod +x /root/archive_packages.sh
-cp scripts/aur_packages.sh $HOME
-chmod +x $HOME/aur_packages.sh
+
+if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+	echo "Set $AURHELPER rsync command to archive_packages.sh script.">&2
+  echo "rsync -chavzP --password-file=/etc/rsyncd.password --ignore-existing /home/$real_user/.cache/$aurhelper/pkg/* rsync://\$user@\$server/archiverepo/archlinux/\$arch/aur" >> /root/archive_packages.sh
+else
+	echo "No AUR helper installed.">&2
+fi
 
 # Rsync credentials
 echo "$user" > /etc/rsyncd.user
@@ -29,7 +37,12 @@ echo "$server" > /etc/rsyncd.server
 chmod 400 /etc/rsyncd.user /etc/rsyncd.password /etc/rsyncd.server
 
 # Add repository to pacman.conf
+if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+  echo "[homerepo-aur]
+  Server = http://$server:8080/archlinux/\$arch/aur
+  SigLevel = Never" >> /etc/pacman.conf
+else
+	echo "No AUR helper installed.">&2
+fi
 echo "[homerepo]
 Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
-echo "[homerepo-aur]
-Server = http://$server:8080/archlinux/\$arch/aur" >> /etc/pacman.conf
