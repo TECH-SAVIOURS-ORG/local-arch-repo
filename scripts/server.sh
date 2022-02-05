@@ -60,7 +60,12 @@ secrets file = /etc/rsyncd.secrets
 systemctl enable --now rsyncd.service
 
 # Add repository to pacman.conf
+if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+  echo "[homerepo-aur]
+  Server = http://$server:8080/archlinux/\$arch/aur
+  SigLevel = Never" >> /etc/pacman.conf
+else
+	echo "No AUR helper installed.">&2
+fi
 echo "[homerepo]
 Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
-echo "[homerepo-aur]
-Server = http://$server:8080/archlinux/\$arch/aur" >> /etc/pacman.conf
