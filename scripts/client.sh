@@ -23,11 +23,11 @@ cp hooks/2.archive_packages-client.hook /etc/pacman.d/hooks/2.archive_packages.h
 cp scripts/archive_packages.sh /root/
 chmod +x /root/archive_packages.sh
 
-if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
-	echo "Set $AURHELPER rsync command to archive_packages.sh script.">&2
+if aurhelper=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+	echo "Set $aurhelper rsync command to archive_packages.sh script."
   echo "rsync -chavzP --password-file=/etc/rsyncd.password --ignore-existing /home/$real_user/.cache/$aurhelper/pkg/* rsync://\$user@\$server/archiverepo/archlinux/\$arch/aur" >> /root/archive_packages.sh
 else
-	echo "No AUR helper installed.">&2
+	echo "No AUR helper installed."
 fi
 
 # Rsync credentials
@@ -38,11 +38,12 @@ chmod 400 /etc/rsyncd.user /etc/rsyncd.password /etc/rsyncd.server
 
 # Add repository to pacman.conf
 if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+	echo "Add $aurhelper AUR helper to pacmans repos."
   echo "[homerepo-aur]
-  Server = http://$server:8080/archlinux/\$arch/aur
-  SigLevel = Never" >> /etc/pacman.conf
+Server = http://$server:8080/archlinux/\$arch/aur
+SigLevel = Never" >> /etc/pacman.conf
 else
-	echo "No AUR helper installed.">&2
+	echo "No AUR helper installed."
 fi
 echo "[homerepo]
 Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
