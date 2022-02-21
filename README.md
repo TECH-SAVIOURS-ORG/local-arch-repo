@@ -1,6 +1,6 @@
 # local-arch-repo
 Running multiple Arch devices? Create your own package archive repository and simply add another device.  
-This is actually for a pinephone and other x86_64 Arch devices. Probably PIs (armv7l) will follow.  
+This is actually for a PinePhone (aarch64), PIs (armv7l) and other x86_64 Arch devices. Probably others will follow.  
 
 # What does it?
 These are just a few bash scripts to install your local repository or add another client, and two hooks for your pacman updates.  
