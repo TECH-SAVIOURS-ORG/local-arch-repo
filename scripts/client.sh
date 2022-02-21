@@ -37,7 +37,7 @@ echo "$server" > /etc/rsyncd.server
 chmod 400 /etc/rsyncd.user /etc/rsyncd.password /etc/rsyncd.server
 
 # Add repository to pacman.conf
-if AURHELPER=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
+if aurhelper=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
 	echo "Add $aurhelper AUR helper to pacmans repos."
   echo "[homerepo-aur]
 Server = http://$server:8080/archlinux/\$arch/aur
