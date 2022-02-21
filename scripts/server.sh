@@ -23,13 +23,13 @@ cp scripts/repo-add.sh /root/
 chmod +x /root/repo-add.sh
 
 # Database
-mkdir -p /srv/http/repo/archlinux/{x86_64,aarch64,armv7l}/aur 
+mkdir -p /srv/http/repo/archlinux/{x86_64,aarch64,armv7h}/aur 
 repo-add /srv/http/repo/archlinux/x86_64/homerepo.db.tar.zst
 repo-add /srv/http/repo/archlinux/x86_64/aur/homerepo-aur.db.tar.zst
 repo-add /srv/http/repo/archlinux/aarch64/homerepo.db.tar.zst
 repo-add /srv/http/repo/archlinux/aarch64/aur/homerepo-aur.db.tar.zst
-repo-add /srv/http/repo/archlinux/armv7l/homerepo.db.tar.zst
-repo-add /srv/http/repo/archlinux/armv7l/aur/homerepo-aur.db.tar.zst
+repo-add /srv/http/repo/archlinux/armv7h/homerepo.db.tar.zst
+repo-add /srv/http/repo/archlinux/armv7h/aur/homerepo-aur.db.tar.zst
 
 # Move existing packages
 mv /var/cache/pacman/pkg/*pkg* /srv/http/repo/archlinux/$arch/
