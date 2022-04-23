@@ -36,14 +36,14 @@ echo "$password" > /etc/rsyncd.password
 echo "$server" > /etc/rsyncd.server
 chmod 400 /etc/rsyncd.user /etc/rsyncd.password /etc/rsyncd.server
 
-# Add repository to pacman.conf
+# Add repository to pacman.conf. May cause a version problem with the other repos. Enable it if you need it. 
 if aurhelper=$(pacman -Qmq | grep -E 'yay|pikaur|paru|trizen') ; then
 	echo "Add $aurhelper AUR helper to pacmans repos."
-  echo "[homerepo-aur]
-Server = http://$server:8080/archlinux/\$arch/aur
-SigLevel = Never" >> /etc/pacman.conf
+  echo "#[homerepo-aur]
+#Server = http://$server:8080/archlinux/\$arch/aur
+#SigLevel = Never" >> /etc/pacman.conf
 else
 	echo "No AUR helper installed."
 fi
-echo "[homerepo]
-Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
+echo "#[homerepo]
+#Server = http://$server:8080/archlinux/\$arch" >> /etc/pacman.conf
